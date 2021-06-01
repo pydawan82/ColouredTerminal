@@ -1,5 +1,6 @@
 package terminal;
 
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
@@ -105,5 +106,16 @@ public class TerminalPrinter extends PrintStream {
 
     public void clearLineTo() {
         print(CSI+TO+CLEAR_LINE);
+    }
+
+    @Override
+    public void close() {
+        reset();
+        flush();
+        try {
+            out.close();
+        } catch(IOException e) {
+            setError();
+        }
     }
 }
