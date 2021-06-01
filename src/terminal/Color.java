@@ -1,6 +1,6 @@
 package terminal;
 
-import static terminal.FormatCodes.*;
+import static terminal.SGRCodes.*;
 
 public enum Color {
     BLACK(FG_BLACK, BG_BLACK),

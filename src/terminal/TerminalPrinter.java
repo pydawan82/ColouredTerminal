@@ -3,7 +3,7 @@ package terminal;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
-import static terminal.FormatCodes.*;
+import static terminal.SGRCodes.*;
 
 public class TerminalPrinter extends PrintStream {
 
@@ -30,14 +30,8 @@ public class TerminalPrinter extends PrintStream {
         return this;
     }
 
-    public TerminalPrinter underline(boolean underlined) {
-        printCode(underlined ? UNDERLINE : NO_UNDERLINE);
-
-        return this;
-    }
-
-    public TerminalPrinter reverse(boolean reversed) {
-        printCode(reversed ? REVERSE : NO_REVERSE);
+    public TerminalPrinter invert(boolean inverted) {
+        printCode(inverted ? INVERT : NO_INVERT);
 
         return this;
     }
