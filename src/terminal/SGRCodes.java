@@ -53,7 +53,10 @@ final class SGRCodes {
     static final int BG_WHITE = 107;
 
     static final int BOLD = 1;
+    static final int NOT_BOLD = 21;
+
     static final int INVERT = 7;
     static final int NO_INVERT = 27;
+    
     static final int DEFAULT = 0;
 }
