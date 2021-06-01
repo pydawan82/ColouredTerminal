@@ -1,8 +1,8 @@
 package terminal;
 
-final class FormatCodes {
+final class SGRCodes {
     
-    private FormatCodes() {};
+    private SGRCodes() {};
 
     static final int FG_BLACK = 30;
     static final int BG_BLACK = 40;
@@ -53,9 +53,7 @@ final class FormatCodes {
     static final int BG_WHITE = 107;
 
     static final int BOLD = 1;
-    static final int UNDERLINE = 4;
-    static final int NO_UNDERLINE = 24;
-    static final int REVERSE = 7;
-    static final int NO_REVERSE = 27;
-    static final int DEFAULT = 1;
+    static final int INVERT = 7;
+    static final int NO_INVERT = 27;
+    static final int DEFAULT = 0;
 }
