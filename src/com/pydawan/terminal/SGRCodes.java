@@ -1,4 +1,4 @@
-package terminal;
+package com.pydawan.terminal;
 
 /**
  * A class to group Select Graphism Renderings codes

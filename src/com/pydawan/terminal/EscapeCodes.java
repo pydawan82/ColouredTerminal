@@ -1,4 +1,4 @@
-package terminal;
+package com.pydawan.terminal;
 
 /**
  * Useful escape codes

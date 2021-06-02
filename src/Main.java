@@ -1,5 +1,5 @@
-import terminal.Color;
-import terminal.TerminalPrinter;
+import com.pydawan.terminal.Color;
+import com.pydawan.terminal.TerminalPrinter;
 
 public class Main {
     

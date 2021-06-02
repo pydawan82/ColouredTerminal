@@ -1,6 +1,6 @@
-package terminal;
+package com.pydawan.terminal;
 
-import static terminal.SGRCodes.*;
+import static com.pydawan.terminal.SGRCodes.*;
 
 /**
  * An enumration of the ANSI SGR colors.

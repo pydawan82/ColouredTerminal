@@ -1,6 +1,6 @@
-package terminal;
+package com.pydawan.terminal;
 
-import static terminal.EscapeCodes.ESCAPE;
+import static com.pydawan.terminal.EscapeCodes.ESCAPE;
 
 /**
  * A class to group control sequences

@@ -1,14 +1,14 @@
-package terminal;
+package com.pydawan.terminal;
+
+import static com.pydawan.terminal.ControlSequenceCodes.*;
+import static com.pydawan.terminal.EscapeCodes.*;
+import static com.pydawan.terminal.SGRCodes.*;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
-import static terminal.EscapeCodes.*;
-import static terminal.ControlSequenceCodes.*;
-import static terminal.SGRCodes.*;
 
 /**
  * A class to wrap a terminal style outputstream. Can display colors and format
