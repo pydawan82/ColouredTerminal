@@ -3,11 +3,15 @@ import terminal.TerminalPrinter;
 
 public class Main {
     
-    public static void main(String ... args) {
+    public static void main(String ... args) throws InterruptedException {
         try(TerminalPrinter term = new TerminalPrinter(System.out)){
-            term.foreground(Color.BRIGHT_BLUE).background(Color.WHITE).bold(true);
-            
-            term.println("Hello World");
+            term.bold(true);
+            term.invert(true);
+            for(Color c: Color.values()) {
+                term.foreground(c);
+                term.println("Hello World!");
+            }
+            term.beep();
         }
     }
 }
