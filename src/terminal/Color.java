@@ -2,6 +2,9 @@ package terminal;
 
 import static terminal.SGRCodes.*;
 
+/**
+ * An enumration of the ANSI SGR colors.
+ */
 public enum Color {
     BLACK(FG_BLACK, BG_BLACK),
     DARK_RED(FG_DARK_RED, BG_DARK_RED),
@@ -10,7 +13,7 @@ public enum Color {
     DARK_BLUE(FG_DARK_BLUE, BG_DARK_BLUE),
     DARK_MAGENTA(FG_DARK_MAGENTA, BG_DARK_MAGENTA),
     DARK_CYAN(FG_DARK_CYAN, BG_DARK_CYAN),
-    DARK_WHITE(FG_DARK_WHITE, BG_BLACK),
+    GRAY(FG_DARK_WHITE, BG_BLACK),
 
     BRIGHT_BLACK(FG_BRIGHT_BLACK, BG_BRIGHT_BLACK),
     BRIGHT_RED(FG_BRIGHT_RED, BG_BRIGHT_RED),
@@ -23,7 +26,14 @@ public enum Color {
     ;
 
 
+    /**
+     * The SGR code associated with the foreground color.
+     */
     final int fgCode;
+    
+    /**
+     * The SGR code associated with the background color.
+     */
     final int bgCode;
 
     Color(int fgCode, int bgCode) {

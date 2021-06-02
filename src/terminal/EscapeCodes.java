@@ -1,5 +1,8 @@
 package terminal;
 
+/**
+ * Useful escape codes
+ */
 final class EscapeCodes {
     
     private EscapeCodes() {};

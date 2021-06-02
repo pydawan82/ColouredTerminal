@@ -1,8 +1,15 @@
 package terminal;
 
+/**
+ * A class to group Select Graphism Renderings codes
+ */
 final class SGRCodes {
     
     private SGRCodes() {};
+
+    /*
+     * Colors
+     */
 
     static final int FG_BLACK = 30;
     static final int BG_BLACK = 40;
@@ -52,11 +59,18 @@ final class SGRCodes {
     static final int FG_WHITE = 97;
     static final int BG_WHITE = 107;
 
+    /*
+     * Text style
+     */
+
     static final int BOLD = 1;
     static final int NOT_BOLD = 21;
 
     static final int INVERT = 7;
     static final int NO_INVERT = 27;
-    
+
+    /*
+     * Default
+     */
     static final int DEFAULT = 0;
 }

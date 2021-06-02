@@ -1,7 +1,14 @@
 package terminal;
 
+import static terminal.EscapeCodes.ESCAPE;
+
+/**
+ * A class to group control sequences
+ */
 final class ControlSequenceCodes {
     private ControlSequenceCodes() {}
+
+    static final String CSI = ESCAPE+"[";
 
     static final String CURSOR_UP = "A";
     static final String CURSOR_DOWN = "B";
@@ -20,5 +27,7 @@ final class ControlSequenceCodes {
 
     static final String SCROLL_UP = "S";
     static final String SCROLL_DOWN = "T";
+
+    static final String SGR = "m";
 
 }
