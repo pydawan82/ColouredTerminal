@@ -7,7 +7,6 @@ import static com.pydawan.terminal.SGRCodes.*;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.lang.ref.Cleaner.Cleanable;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 

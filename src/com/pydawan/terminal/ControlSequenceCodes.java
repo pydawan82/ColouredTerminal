@@ -30,4 +30,7 @@ final class ControlSequenceCodes {
 
     static final String SGR = "m";
 
+    static final String DSR = "n";
+    static final int GET_CURSOR_POS = 6;
+
 }
