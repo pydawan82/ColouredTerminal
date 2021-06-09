@@ -160,6 +160,24 @@ public class TerminalPrinter extends PrintStream {
     public void cursorPrevious(int n) {
         printCSICode(CURSOR_PREVIOUS_LINE, n);
     }
+    
+    /**
+     * Moves the cursor relatively by given distance
+     *
+     * @param dx - the horizontal shift
+     * @param dy - the vertical shift
+     */
+    public void cursorMove(int dx, int dy) {
+	if(dx<0)
+	    cursorBack(-dx);
+	else if(dx>0)
+	    cursorForward(dx);
+
+	if(dy<0)
+	    cursorPrevioux(-dy);
+	else if(dy>0)
+	    cursorNext(dy);
+    }
 
     /**
      * Sets the cursor position in the current line.
