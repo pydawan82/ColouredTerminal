@@ -183,10 +183,21 @@ public class TerminalPrinter extends PrintStream {
     /**
      * Clears the display and sets the cursor position to the top-left of the
      * display.
+     * @see #clear(boolean)
      */
     public void clear() {
+        clear(true);
+    }
+
+    /**
+     * Clears the display and sets the cursor position to the top-left of the
+     * display if argument is true
+     * @param replaceCursor - if the cursor should be moved to the top-left
+     */
+    public void clear(boolean replaceCursor) {
         printCSICode(CLEAR_DISP, ALL);
-        cursorPos(1, 1);
+        if(replaceCursor)
+            cursorPos(1, 1);
     }
 
     /**
@@ -204,11 +215,23 @@ public class TerminalPrinter extends PrintStream {
     }
 
     /**
-     * Clears the whole line of the cursor's position.
+     * Clears the whole line of the cursor's position. And move the
+     * cursor the beginning of the line.
+     * @see #clearLine(boolean)
      */
     public void clearLine() {
+        clearLine(true);
+    }
+
+    /**
+     * Clears the whole line and replace the cursor at the beginning of the line
+     * if passed argument is true.
+     * @param replaceCursor - if cursor should be moved to the beginning of the line
+     */
+    public void clearLine(boolean replaceCursor) {
         printCSICode(CLEAR_LINE, ALL);
-        cursorPos(1);
+        if(replaceCursor)
+            cursorPos(1);
     }
 
     /**
