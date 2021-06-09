@@ -7,6 +7,7 @@ import static com.pydawan.terminal.SGRCodes.*;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.lang.ref.Cleaner.Cleanable;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -113,7 +114,7 @@ public class TerminalPrinter extends PrintStream {
      * @param n - the number of lines
      */
     public void cursorUp(int n) {
-        print(CSI + n + CURSOR_UP);
+        printCSICode(CURSOR_UP, n);
     }
 
     /**
@@ -122,7 +123,7 @@ public class TerminalPrinter extends PrintStream {
      * @param n - the number of lines
      */
     public void cursorDown(int n) {
-        print(CSI + n + CURSOR_DOWN);
+        printCSICode(CURSOR_DOWN, n);
     }
 
     /**
@@ -131,7 +132,7 @@ public class TerminalPrinter extends PrintStream {
      * @param n - the offset
      */
     public void cursorForward(int n) {
-        print(CSI + n + CURSOR_FORWARD);
+        printCSICode(CURSOR_FORWARD, n);
     }
 
     /**
@@ -140,7 +141,7 @@ public class TerminalPrinter extends PrintStream {
      * @param n - the offset
      */
     public void cursorBack(int n) {
-        print(CSI + n + CURSOR_BACK);
+        printCSICode(CURSOR_BACK, n);
     }
 
     /**
@@ -149,7 +150,7 @@ public class TerminalPrinter extends PrintStream {
      * @param n - the number of line
      */
     public void cursorNext(int n) {
-        print(CSI + n + CURSOR_NEXT_LINE);
+        printCSICode(CURSOR_NEXT_LINE, n);
     }
 
     /**
@@ -158,7 +159,7 @@ public class TerminalPrinter extends PrintStream {
      * @param n - the number of line
      */
     public void cursorPrevious(int n) {
-        print(CSI + n + CURSOR_PREVIOUS_LINE);
+        printCSICode(CURSOR_PREVIOUS_LINE, n);
     }
 
     /**
@@ -167,7 +168,7 @@ public class TerminalPrinter extends PrintStream {
      * @param x - the absolute position
      */
     public void cursorPos(int x) {
-        print(CSI + x + CURSOR_NEXT_LINE);
+        printCSICode(CURSOR_H_POS, x);
     }
 
     /**
@@ -177,7 +178,7 @@ public class TerminalPrinter extends PrintStream {
      * @param y - the vertical absolute position
      */
     public void cursorPos(int x, int y) {
-        print(CSI + x + ";" + y + CURSOR_NEXT_LINE);
+        printCSICode(CURSOR_POS, x, y);
     }
 
     /**
@@ -185,7 +186,7 @@ public class TerminalPrinter extends PrintStream {
      * display.
      */
     public void clear() {
-        print(CSI + ALL + CLEAR_DISP);
+        printCSICode(CLEAR_DISP, ALL);
         cursorPos(1, 1);
     }
 
@@ -193,21 +194,21 @@ public class TerminalPrinter extends PrintStream {
      * Clears the display from the cursor's position to the end of the display.
      */
     public void clearFrom() {
-        print(CSI + FROM + CLEAR_DISP);
+        printCSICode(CLEAR_DISP, FROM);
     }
 
     /**
      * Clears the display from the begin ning to the cursor's position.
      */
     public void clearTo() {
-        print(CSI + TO + CLEAR_DISP);
+        printCSICode(CLEAR_DISP, TO);
     }
 
     /**
      * Clears the whole line of the cursor's position.
      */
     public void clearLine() {
-        print(CSI + ALL + CLEAR_LINE);
+        printCSICode(CLEAR_LINE, ALL);
         cursorPos(1);
     }
 
@@ -215,14 +216,18 @@ public class TerminalPrinter extends PrintStream {
      * Clears a line from the cursor's position to its end
      */
     public void clearLineFrom() {
-        print(CSI + FROM + CLEAR_LINE);
+        printCSICode(CLEAR_LINE, FROM);
     }
 
     /**
      * Clears a line from the the beginning to the cursor's position
      */
     public void clearLineTo() {
-        print(CSI + TO + CLEAR_LINE);
+        printCSICode(CLEAR_LINE, TO);
+    }
+
+    public void getCursorPos() {
+        printCSICode(DSR, GET_CURSOR_POS);
     }
 
     /**
@@ -231,6 +236,21 @@ public class TerminalPrinter extends PrintStream {
     public void beep() {
         print(BELL);
         flush();
+    }
+
+    public void printLoading(int width, double completion) {
+        clearLineFrom();
+        print('[');
+        for(int i=0; i<width; i++) {
+            print((((double)i/width) < completion)?'-':' ');
+        }
+        print(']');
+        cursorBack(width+2);
+        flush();
+    }
+
+    public void printLoading(int width, double lastStatus, double newStatus) {
+        
     }
 
     /**
