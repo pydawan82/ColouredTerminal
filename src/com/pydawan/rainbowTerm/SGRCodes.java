@@ -1,4 +1,4 @@
-package com.pydawan.terminal;
+package com.pydawan.rainbowTerm;
 
 /**
  * A class to group Select Graphism Renderings codes

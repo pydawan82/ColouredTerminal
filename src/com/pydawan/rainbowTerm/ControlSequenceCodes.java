@@ -1,6 +1,6 @@
-package com.pydawan.terminal;
+package com.pydawan.rainbowTerm;
 
-import static com.pydawan.terminal.EscapeCodes.ESCAPE;
+import static com.pydawan.rainbowTerm.EscapeCodes.ESCAPE;
 
 /**
  * A class to group control sequences

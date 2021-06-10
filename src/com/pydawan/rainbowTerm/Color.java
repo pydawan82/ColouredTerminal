@@ -1,6 +1,6 @@
-package com.pydawan.terminal;
+package com.pydawan.rainbowTerm;
 
-import static com.pydawan.terminal.SGRCodes.*;
+import static com.pydawan.rainbowTerm.SGRCodes.*;
 
 /**
  * An enumration of the ANSI SGR colors.

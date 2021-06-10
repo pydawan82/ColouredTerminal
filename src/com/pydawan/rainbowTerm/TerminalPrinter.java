@@ -1,8 +1,8 @@
-package com.pydawan.terminal;
+package com.pydawan.rainbowTerm;
 
-import static com.pydawan.terminal.ControlSequenceCodes.*;
-import static com.pydawan.terminal.EscapeCodes.*;
-import static com.pydawan.terminal.SGRCodes.*;
+import static com.pydawan.rainbowTerm.ControlSequenceCodes.*;
+import static com.pydawan.rainbowTerm.EscapeCodes.*;
+import static com.pydawan.rainbowTerm.SGRCodes.*;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -174,7 +174,7 @@ public class TerminalPrinter extends PrintStream {
 	    cursorForward(dx);
 
 	if(dy<0)
-	    cursorPrevioux(-dy);
+	    cursorPrevious(-dy);
 	else if(dy>0)
 	    cursorNext(dy);
     }

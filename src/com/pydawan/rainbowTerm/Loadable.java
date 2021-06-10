@@ -1,4 +1,4 @@
-package com.pydawan.terminal;
+package com.pydawan.rainbowTerm;
 
 import java.util.concurrent.atomic.AtomicReference;
 
