@@ -33,18 +33,30 @@ public class TerminalPrinter extends PrintStream {
      * @param cmdChar - the command
      * @param params  - the parameters
      */
-    private void printCSICode(String cmdChar, int... params) {
+    private void controlSequence(String cmdChar, int... params) {
         String joinedParams = IntStream.of(params).mapToObj(Integer::toString).collect(Collectors.joining(";"));
         print(CSI + joinedParams + cmdChar);
     }
 
     /**
      * Prints the given SGR code to the output.
-     * 
      * @param code - the SGR code
      */
-    private void printSGRCode(int code) {
-        printCSICode(SGR, code);
+    private void setGraphics(int code) {
+        controlSequence(SGR, code);
+    }
+
+    /**
+     * Resets the current terminal graphics and sets the new
+     * configuration.
+     * @param config - the configuration to be set
+     */
+    public void setConfiguration(Configuration config) {
+        reset();
+
+        foreground(config.foreground());
+        background(config.background());
+        bold(config.bold());
     }
 
     /**
@@ -55,7 +67,7 @@ public class TerminalPrinter extends PrintStream {
      * @return this terminal printer
      */
     public TerminalPrinter foreground(Color color) {
-        printSGRCode(color.fgCode);
+        setGraphics(color.fgCode);
 
         return this;
     }
@@ -68,7 +80,7 @@ public class TerminalPrinter extends PrintStream {
      * @return this terminal printer
      */
     public TerminalPrinter background(Color color) {
-        printSGRCode(color.bgCode);
+        setGraphics(color.bgCode);
 
         return this;
     }
@@ -82,7 +94,7 @@ public class TerminalPrinter extends PrintStream {
      * @return this terminal printer
      */
     public TerminalPrinter invert(boolean inverted) {
-        printSGRCode(inverted ? INVERT : NO_INVERT);
+        setGraphics(inverted ? INVERT : NO_INVERT);
 
         return this;
     }
@@ -95,7 +107,7 @@ public class TerminalPrinter extends PrintStream {
      * @return this terminal printer
      */
     public TerminalPrinter bold(boolean bold) {
-        printSGRCode(bold ? BOLD : NOT_BOLD);
+        setGraphics(bold ? BOLD : NOT_BOLD);
 
         return this;
     }
@@ -104,7 +116,7 @@ public class TerminalPrinter extends PrintStream {
      * Resets all the graphics properties of this terminal.
      */
     public void reset() {
-        printSGRCode(DEFAULT);
+        setGraphics(DEFAULT);
     }
 
     /**
@@ -113,7 +125,7 @@ public class TerminalPrinter extends PrintStream {
      * @param n - the number of lines
      */
     public void cursorUp(int n) {
-        printCSICode(CURSOR_UP, n);
+        controlSequence(CURSOR_UP, n);
     }
 
     /**
@@ -122,7 +134,7 @@ public class TerminalPrinter extends PrintStream {
      * @param n - the number of lines
      */
     public void cursorDown(int n) {
-        printCSICode(CURSOR_DOWN, n);
+        controlSequence(CURSOR_DOWN, n);
     }
 
     /**
@@ -131,7 +143,7 @@ public class TerminalPrinter extends PrintStream {
      * @param n - the offset
      */
     public void cursorForward(int n) {
-        printCSICode(CURSOR_FORWARD, n);
+        controlSequence(CURSOR_FORWARD, n);
     }
 
     /**
@@ -140,7 +152,7 @@ public class TerminalPrinter extends PrintStream {
      * @param n - the offset
      */
     public void cursorBack(int n) {
-        printCSICode(CURSOR_BACK, n);
+        controlSequence(CURSOR_BACK, n);
     }
 
     /**
@@ -149,7 +161,7 @@ public class TerminalPrinter extends PrintStream {
      * @param n - the number of line
      */
     public void cursorNext(int n) {
-        printCSICode(CURSOR_NEXT_LINE, n);
+        controlSequence(CURSOR_NEXT_LINE, n);
     }
 
     /**
@@ -158,7 +170,7 @@ public class TerminalPrinter extends PrintStream {
      * @param n - the number of line
      */
     public void cursorPrevious(int n) {
-        printCSICode(CURSOR_PREVIOUS_LINE, n);
+        controlSequence(CURSOR_PREVIOUS_LINE, n);
     }
     
     /**
@@ -185,7 +197,7 @@ public class TerminalPrinter extends PrintStream {
      * @param x - the absolute position
      */
     public void cursorPos(int x) {
-        printCSICode(CURSOR_H_POS, x);
+        controlSequence(CURSOR_H_POS, x);
     }
 
     /**
@@ -195,7 +207,7 @@ public class TerminalPrinter extends PrintStream {
      * @param y - the vertical absolute position
      */
     public void cursorPos(int x, int y) {
-        printCSICode(CURSOR_POS, x, y);
+        controlSequence(CURSOR_POS, x, y);
     }
 
     /**
@@ -213,7 +225,7 @@ public class TerminalPrinter extends PrintStream {
      * @param replaceCursor - if the cursor should be moved to the top-left
      */
     public void clear(boolean replaceCursor) {
-        printCSICode(CLEAR_DISP, ALL);
+        controlSequence(CLEAR_DISP, ALL);
         if(replaceCursor)
             cursorPos(1, 1);
     }
@@ -222,14 +234,14 @@ public class TerminalPrinter extends PrintStream {
      * Clears the display from the cursor's position to the end of the display.
      */
     public void clearFrom() {
-        printCSICode(CLEAR_DISP, FROM);
+        controlSequence(CLEAR_DISP, FROM);
     }
 
     /**
      * Clears the display from the begin ning to the cursor's position.
      */
     public void clearTo() {
-        printCSICode(CLEAR_DISP, TO);
+        controlSequence(CLEAR_DISP, TO);
     }
 
     /**
@@ -247,7 +259,7 @@ public class TerminalPrinter extends PrintStream {
      * @param replaceCursor - if cursor should be moved to the beginning of the line
      */
     public void clearLine(boolean replaceCursor) {
-        printCSICode(CLEAR_LINE, ALL);
+        controlSequence(CLEAR_LINE, ALL);
         if(replaceCursor)
             cursorPos(1);
     }
@@ -256,18 +268,18 @@ public class TerminalPrinter extends PrintStream {
      * Clears a line from the cursor's position to its end
      */
     public void clearLineFrom() {
-        printCSICode(CLEAR_LINE, FROM);
+        controlSequence(CLEAR_LINE, FROM);
     }
 
     /**
      * Clears a line from the the beginning to the cursor's position
      */
     public void clearLineTo() {
-        printCSICode(CLEAR_LINE, TO);
+        controlSequence(CLEAR_LINE, TO);
     }
 
     public void getCursorPos() {
-        printCSICode(DSR, GET_CURSOR_POS);
+        controlSequence(DSR, GET_CURSOR_POS);
     }
 
     /**
