@@ -1,7 +1,9 @@
 import java.io.IOException;
 
 import com.pydawan.rainbowTerm.Color;
+import com.pydawan.rainbowTerm.TablePrinter;
 import com.pydawan.rainbowTerm.TerminalPrinter;
+
 
 public class Main {
 
@@ -9,10 +11,17 @@ public class Main {
         try(TerminalPrinter term = new TerminalPrinter(System.out)) {
             term.foreground(Color.DARK_RED).bold(true);
             term.clear();
-            term.cursorPos(4, 4);
-            term.print("Ok");
-            term.cursorMove(2, 2);
-            term.print("Salut à tous");
+           
+            String[] colNames = {"Name", "First Name", "Born", "Address"};
+            int[] colWidths = {15, 15, 10, 20};
+            String[][] table = {
+                {"Dewi", "Brittle", "08/02/2000", "10 Monk Street 7534 Clay"},
+                {"Lowe", "Brittle", "08/02/2000", "Clay"},
+                {"Michel", "Dumas", "07/01/1959", "43 Rue de la Cannebière 54060 Montréal"},
+            };
+
+            TablePrinter.print(term, colWidths, colNames, table);
+            term.println();
         }
     }
 }
